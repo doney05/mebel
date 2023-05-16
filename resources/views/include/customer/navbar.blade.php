@@ -13,7 +13,7 @@
                 <div class="row total-header-section">
                     @php $total = 0 @endphp
                     @foreach($carts as $detail)
-                        @php $total += $detail->price * $detail->qty @endphp
+                        @php $total += $detail->price @endphp
                     @endforeach
                     <div class="col-lg-12 col-sm-12 col-12 total-section text-right">
                         <p style="    margin-top: 15px;

@@ -23,7 +23,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'role',
-        'alamat'
     ];
 
     /**
@@ -44,4 +43,25 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class. 'users_id');
+    }
+    public function cartdetail()
+    {
+        return $this->hasMany(CartDetail::class, 'users_id');
+    }
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'users_id');
+    }
+    public function alamat()
+    {
+        return $this->hasMany(AlamatTujuan::class, 'users_id');
+    }
+    public function payment()
+    {
+        return $this->hasMany(Payment::class, 'users_id');
+    }
 }

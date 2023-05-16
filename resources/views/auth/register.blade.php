@@ -273,7 +273,7 @@
                 </div> --}}
             </div>
 
-            <div style="margin-top: 1rem;">
+            {{-- <div style="margin-top: 1rem;">
                 <label for="" class="d-block input-label">Alamat</label>
                 <div class="d-flex w-100 div-input">
                   <input class="input-field @error('alamat') is-invalid @enderror" type="text" name="alamat" id="alamat" placeholder="Alamat Pengguna" autocomplete="on"
@@ -284,7 +284,7 @@
                         </span>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
             {{-- <div class="d-flex justify-content-end" style="margin-top: 0.75rem;">
               <a href="#" class="forgot-password fst-italic">Forgot Password?</a>
             </div> --}}

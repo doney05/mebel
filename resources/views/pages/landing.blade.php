@@ -188,7 +188,7 @@
                     </div>
                 </div>
 
-                <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-workly/img-header.png"
+                <img src="{{ asset('client/assets/img/jam-besar.jpeg') }}"
                     alt="background-head" class="d-none d-lg-block bg-workly" />
             </div>
         </div>
@@ -332,7 +332,7 @@
         <div class="row text-content title pt-35 my-0 mx-0" id="header">
             <div class="col-md-9 px-md-0">
                 <h1 class="pb-3">
-                    Eksplor produk kami
+                    Eksplor semua produk
                 </h1>
                 <p class="pb-0 descript-explore">
                     Berbagai macam produk mebel kami sediakan untuk Anda
@@ -340,21 +340,38 @@
             </div>
             <div class="col-md-3 mt-md-3">
                 @auth
-                    <a href="{{ url('dashboard/'. Auth::user()->id ) }}" class="btn btn-blue px-5 py-3 mt-0">Learn More</a>
+                    <a href="{{ url('dashboard/'. Auth::user()->id ) }}" class="btn btn-blue px-5 py-3 mt-0">Lebih Lanjut</a>
                 @endauth
                 @guest
-                    <a href="{{ url('login') }}" class="btn btn-blue px-5 py-3 mt-0">Learn More</a>
+                    <a href="{{ url('login') }}" class="btn btn-blue px-5 py-3 mt-0">Lebih Lanjut</a>
 
                 @endguest
             </div>
         </div>
-        <div class="row section scrolling-wrapper flex-row flex-nowrap mt-3 img-explore mx-2">
-            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-House/image-1.jpeg"
+        <div class="row section scrolling-wrapper flex-nowrap mt-3 img-explore mx-2">
+            @foreach ($products as $item)
+            <img src="{{ Storage::url($item->images) }}"
                 alt="image-1" class="img-fluid">
-            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-House/image-2.jpeg"
-                alt="image-2" class="img-fluid">
-            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-House/image-3.jpeg"
-                alt="image-3" class="img-fluid">
+            {{-- <div class="card mx-2">
+                <div class="card-body">
+                    <div class="isi">
+                        <div class="title position-absolute" style="text-align: center;">
+                                <h5>{{ $item->name }}</h5>
+                                <p>
+                                    {{ $item->price }}
+                                <br>
+                                    {{ $item->weight }}
+                                <br>
+                                    {{ $item->stok }}
+                                <br>
+                                    {{ $item->description }}
+                                </p>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+            @endforeach
+
         </div>
     </div>
 </section>
