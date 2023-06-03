@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('number');
             $table->string('invoice');
             $table->date('tanggal');
-            $table->integer('status');
             $table->timestamps();
         });
     }

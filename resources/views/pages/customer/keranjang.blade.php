@@ -94,7 +94,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Isikan Alamat Terlebih Dahulu</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Lengkapi profile terlebih dahulu</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -112,6 +112,16 @@
                     @endforeach
                     <input type="hidden" name="total" value="{{ $total }}">
                     @if ($alamat)
+                        <div class="form-group">
+                            <label for="province">Nama</label>
+                            <input type="text" value="{{ $user[0]['name'] }}" class="form-control" placeholder="{{ $user[0]['name'] }}" readonly>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="province">Nomor Telepon</label>
+                            <input type="text" name="phone" value="{{ $alamat->phone }}" class="form-control" placeholder="{{ $alamat->phone }}" required>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="province">Provinsi</label>
                             <select name="provinces_id" id="provinces_id" class="form-control" required>
@@ -132,6 +142,16 @@
                             <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control">{{ $alamat->alamat }}</textarea>
                         </div>
                     @else
+                        <div class="form-group">
+                            <label for="province">Nama</label>
+                            <input type="text" class="form-control" value="{{ $user[0]['name'] }}" placeholder="{{ $user[0]['name'] }}" readonly>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="province">Nomor Telepon</label>
+                            <input type="text" name="phone" value="" class="form-control" placeholder="Nomor Telepon" required>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="province">Provinsi</label>
                             <select name="provinces_id" id="provinces_id" class="form-control" required>

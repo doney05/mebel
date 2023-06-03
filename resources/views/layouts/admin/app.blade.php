@@ -44,15 +44,6 @@
       <!-- start head bottom -->
       <!-- end head bottom -->
     </div>
-    <div class="bottom">
-      <div class="left">
-        <h1>dashboard</h1>
-      </div>
-      <div class="right">
-        <h1>dashboard /</h1>
-        <a href="#">page name</a>
-      </div>
-    </div>
     <!-- end content head -->
     <!-- start with the real content -->
     <div id="real">

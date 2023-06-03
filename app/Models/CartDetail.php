@@ -26,4 +26,8 @@ class CartDetail extends Model
     {
         return $this->belongsTo(AlamatTujuan::class, 'alamat_tujuans_id');
     }
+    public function paymentdetail()
+    {
+        return $this->hasMany(PaymentDetail::class, 'cart_details_id');
+    }
 }

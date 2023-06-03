@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('alamat_tujuans_id')->references('id')->on('alamat_tujuans');
             $table->unsignedBigInteger('invoices_id');
             $table->foreign('invoices_id')->references('id')->on('invoices');
+            $table->integer('payment_details_id');
             $table->integer('qty');
             $table->integer('weight');
             $table->integer('price');

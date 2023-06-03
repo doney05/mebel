@@ -30,4 +30,8 @@ class AlamatTujuan extends Model
     {
         return $this->hasMany(Payment::class, 'alamat_tujuans_id');
     }
+    public function paymentdetail()
+    {
+        return $this->hasMany(PaymentDetail::class, 'alamat_tujuans_id');
+    }
 }

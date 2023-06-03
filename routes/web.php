@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController as ControllersProductController;
@@ -48,8 +50,18 @@ Route::post('checkout/{id}', [PesananController::class, 'index'])->name('checkou
 Route::get('get-ongkir/{id}', [PesananController::class, 'cekOngkir'])->name('get-ongkir');
 Route::post('simpan-ongkir/{id}', [PesananController::class, 'saveOngkir'])->name('simpan-ongkir');
 
-Route::group(['middleware' => ['auth', 'admin']], function() {
-    Route::get('admin/dashboard', [DashboardController::class, 'index']);
+//Route Midtrans
+// Route::post('midtrans-callback/{id}', [PesananController::class, 'callback']);
+Route::get('/checkout-success/{id}', [PesananController::class, 'success']);
+
+//Route History Pesanan
+Route::get('history/{id}', [HistoryController::class, 'index'])->name('history.index');
+Route::get('invoice/{id}', [HistoryController::class, 'invoice'])->name('history.invoice');
+
+
+
+Route::middleware(['auth', 'admin'])->namespace('ADMIN')->group(function() {
+    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     //product
     Route::get('admin/product/index', [ProductController::class, 'index'])->name('product.index');
@@ -58,6 +70,13 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('admin/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('admin/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+
+    //transaksi
+    Route::get('admin/transaksi/sukses', [TransaksiController::class, 'sukses'])->name('transaksi.sukses');
+    Route::get('admin/transaksi/sukses/invoice/{id}', [TransaksiController::class, 'invoice'])->name('transaksi.sukses.invoice');
+    Route::delete('admin/transaksi/sukses/delete/{id}', [TransaksiController::class, 'suksesDelete'])->name('transaksi.sukses.delete');
+    Route::get('admin/transaksi/batal', [TransaksiController::class, 'batal'])->name('transaksi.batal');
+    Route::delete('admin/transaksi/batal/delete/{id}', [TransaksiController::class, 'batalDelete'])->name('transaksi.batal.delete');
 });
 
 Route::get('redirect-google', [GoogleController::class, 'redirectGoogle'])->name('redirect-google');
@@ -69,4 +88,3 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

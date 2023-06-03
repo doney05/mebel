@@ -24,8 +24,8 @@ class Invoice extends Model
     {
         parent::boot();
         Invoice::creating(function($pesan){
-            $pesan->number = Invoice::where('users_id', Auth::user()->id)->max('number') + 1;
-            $pesan->kode_unik = 'INV'.'/'. Carbon::now()->format('Ymd') . '/'. str_pad($pesan->number, 5, '0', STR_PAD_LEFT);
+            $pesan->number = Invoice::max('number') + 1;
+            $pesan->invoice = 'INV'.'/'. Carbon::now()->format('Ymd') . '/'. str_pad($pesan->number, 5, '0', STR_PAD_LEFT);
         });
     }
 }

@@ -6,9 +6,11 @@ use App\Models\AlamatTujuan;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\City;
+use App\Models\PaymentDetail;
 use App\Models\PesananDetail;
 use App\Models\Product;
 use App\Models\Province;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +19,10 @@ class ProductCustomerController extends Controller
     public function index()
     {
         $carts = Cart::with(['user', 'product'])->where('users_id', Auth::user()->id)->get();
-        return view('pages.customer.dashboard', compact('carts'));
+        $cart = Cart::where('users_id', Auth::user()->id)->count();
+        $pay = PaymentDetail::where('users_id', Auth::user()->id)->count();
+
+        return view('pages.customer.dashboard', compact('carts', 'cart', 'pay'));
     }
     public function product($id)
     {
@@ -51,8 +56,9 @@ class ProductCustomerController extends Controller
         $provinces = Province::all();
         $alamat = AlamatTujuan::with(['user', 'province', 'city', 'cartdetail'])->where('users_id', Auth::user()->id)->first();
         $hasil = Cart::with(['user', 'product'])->where('users_id', Auth::user()->id)->count();
-        // dd($hasil);
-        return view('pages.customer.keranjang', compact('id', 'carts', 'provinces', 'alamat', 'hasil'));
+        $user = User::where('id', Auth::user()->id)->get()->toArray();
+        // dd($user);
+        return view('pages.customer.keranjang', compact('id', 'carts', 'provinces', 'user', 'alamat', 'hasil'));
     }
     public function getCity($id)
     {

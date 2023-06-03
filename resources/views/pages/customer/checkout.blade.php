@@ -54,18 +54,25 @@
                 <div class="col-6" style="text-align: end; font-size: 14px">
                     <p>{{ $hasil }} Produk</p>
                     <p style="margin-top: -13px;">Rp. {{ number_format($alamat->ongkir) }}</p>
+                    @if ($alamat->kurir == true)
                     <p style="margin-top: -13px;">{{ $alamat->kurir }}</p>
+                    <p style="margin-top: -13px;">Rp. {{ number_format($harga + $alamat->ongkir) }}</p>
+                    @else
+                    <p style="margin-top: -13px;">-</p>
                     <p style="margin-top: -13px;">Rp. {{ number_format($harga) }}</p>
+                    @endif
                 </div>
             </div>
            <div class="isi mt-3">
             <table class="table table-bordered">
                 <thead>
+                    {{-- {{ dd($snapToken) }} --}}
                     <tr>
                         <th>No</th>
                         <th>Nama Produk</th>
                         <th>Jumlah Beli</th>
                         <th>Grand Total</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,20 +82,32 @@
                         <td>{{ $item->product->name }}</td>
                         <td>{{ $item->qty }}</td>
                         <td>Rp. {{ number_format($item->price) }}</td>
+                        <td>Unpaid</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             <div class="bayar mt-4 d-flex justify-content-end">
-                <form action="#">
+                @if (!empty($alamat->ongkir))
+                {{-- <form action="{{ url('payment/'. Auth::user()->id) }}" method="POST">
+                    @csrf --}}
+                    <button type="submit" id="pay-button" class="btn btn-bayar btn-primary">Bayar Sekarang</button>
+                {{-- </form> --}}
+                @else
+                {{-- <form action="{{ url('payment/'. Auth::user()->id) }}" method="POST">
+                    @csrf --}}
                     <button class="btn btn-bayar btn-primary">Bayar Sekarang</button>
-                </form>
+                {{-- </form> --}}
+                @endif
             </div>
            </div>
         </div>
     </div>
 @endsection
 @push('script')
+<script type="text/javascript"
+src="https://app.sandbox.midtrans.com/snap/snap.js"
+data-client-key="{{ config('midtrans.client_key') }}"></script>
     <script>
         $(document).ready(function(){
             $('#courier').on('change', function(){
@@ -115,4 +134,18 @@
             })
         });
     </script>
+       <script type="text/javascript">
+        // For example trigger on button clicked, or any time you need
+        var payButton = document.getElementById('pay-button');
+        payButton.addEventListener('click', function () {
+          // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+          window.snap.pay('{{ $snapToken }}', {
+            onSuccess: function (result) {
+                window.location.href = '/checkout-success/{{ Auth::user()->id }}'
+            }
+          });
+
+          // customer will be redirected after completing payment pop-up
+        });
+      </script>
 @endpush

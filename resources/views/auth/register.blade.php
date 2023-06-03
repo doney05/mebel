@@ -214,7 +214,7 @@
               </div>
             </div>
             <div style="margin-bottom: 1.75rem;">
-              <label for="" class="d-block input-label">Email Address</label>
+              <label for="" class="d-block input-label">Alamat Email</label>
               <div class="d-flex w-100 div-input">
                 <input class="input-field @error('email') is-invalid @enderror" type="email" name="email" id="email" placeholder="Email Pengguna" autocomplete="on"
                   required value="{{ old('email') }}" >
@@ -225,6 +225,18 @@
                     @enderror
               </div>
             </div>
+            {{-- <div style="margin-bottom: 1.75rem;">
+                <label for="" class="d-block input-label">Nomor Telepon</label>
+                <div class="d-flex w-100 div-input">
+                  <input class="input-field @error('phone') is-invalid @enderror" type="text" name="phone" id="phone" placeholder="Nomor Telepon" autocomplete="on"
+                    required value="{{ old('phone') }}" >
+                      @error('phone')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                </div>
+              </div> --}}
             <div style="margin-top: 1rem;">
               <label for="" class="d-block input-label">Password</label>
               <div class="d-flex w-100 div-input">

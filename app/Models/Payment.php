@@ -26,5 +26,9 @@ class Payment extends Model
     {
         return $this->belongsTo(Invoice::class, 'invoices_id');
     }
+    public function detail()
+    {
+        return $this->belongsTo(PaymentDetail::class, 'payment_details_id');
+    }
 
 }

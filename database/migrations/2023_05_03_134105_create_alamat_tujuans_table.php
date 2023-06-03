@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('kurir')->nullable();
             $table->integer('ongkir')->nullable();
             $table->text('alamat')->nullable();
+            $table->string('phone')->unique();
             $table->timestamps();
         });
     }
