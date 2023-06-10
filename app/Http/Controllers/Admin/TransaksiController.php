@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PaymentDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -11,10 +12,10 @@ class TransaksiController extends Controller
     public function sukses()
     {
         $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.payment.product', 'payment'])->orderBy('id', 'DESC')->get()->toArray();
-        $totalProduk = count($pays[0]['user']['payment']);
+        // $totalProduk = count($pays[0]['user']['payment']);
 
         // dd($pays);
-        return view('pages.admin.transaksi.sukses.index', compact('pays', 'totalProduk'));
+        return view('pages.admin.transaksi.sukses.index', compact('pays'));
     }
     public function invoice(Request $request, $id)
     {
@@ -35,11 +36,11 @@ class TransaksiController extends Controller
     }
     public function batal()
     {
-        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.payment.product', 'payment'])->orderBy('id', 'DESC')->get()->toArray();
-        $totalProduk = count($pays[0]['user']['payment']);
+        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.payment.product', 'payment'])->where('status', '=', 'Unpaid')->orderBy('id', 'DESC')->get()->toArray();
+        // $totalProduk = count($pays[0]['user']['payment']);
 
         // dd($pays);
-        return view('pages.admin.transaksi.batal.index', compact('pays', 'totalProduk'));
+        return view('pages.admin.transaksi.batal.index', compact('pays'));
     }
     public function batalDelete(Request $request, $id)
     {

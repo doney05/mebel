@@ -15,9 +15,9 @@ class HistoryController extends Controller
         $carts = Cart::with(['user', 'product'])->where('users_id', Auth::user()->id)->get();
         $history = Payment::with(['user', 'product', 'invoice', 'detail', 'alamat'])->where('users_id', $id)->get();
         $pay = PaymentDetail::with(['user.payment', 'user.invoice', 'user.payment.product', 'payment'])->where('users_id', $id)->orderBy('id', 'DESC')->get()->toArray();
-        $totalProduk = count($pay[0]['user']['payment']);
-        // dd($pay, $totalProduk);
-        return view('pages.customer.history', compact('history', 'pay', 'carts', 'totalProduk'));
+        // $totalProduk = count($pay[0]['user']['payment']);
+        // dd($pay);
+        return view('pages.customer.history', compact('history', 'pay', 'carts'));
     }
     public function invoice(Request $request, $id)
     {

@@ -129,7 +129,7 @@
                                 <p>Total Ongkos Kirim</p>
                             </div>
                             <div class="col-6">
-                                <p>Rp. {{ number_format($pay[0]['alamat']['ongkir']) }}</p>
+                                <p>Rp. {{ number_format($pay[0]['ongkir']) }}</p>
                             </div>
                         </div>
                         <div class="row belanja">
@@ -137,7 +137,7 @@
                                 <p>TOTAL BELANJA</p>
                             </div>
                             <div class="col-6">
-                                <p>Rp. {{ number_format($total + $pay[0]['alamat']['ongkir']) }}</p>
+                                <p>Rp. {{ number_format($total + $pay[0]['ongkir']) }}</p>
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
             <div class="bayar mb-5">
                 <div class="row">
                     <div class="col-6">
-                        <p>Kurir <br> <span style="font-weight:bold">{{ $pay[0]['alamat']['kurir'] }}</span></p>
+                        <p>Kurir <br> <span style="font-weight:bold">{{ $pay[0]['kurir'] }}</span></p>
                     </div>
                     <div class="col-6">
                         <p>Metode Pembayaran <br> <span style="font-weight:bold">{{ $pay[0]['bank'] }}</span></p>

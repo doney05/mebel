@@ -262,14 +262,13 @@
                 <label for="password-confirm" class="d-block input-label">{{ __('Confirm Password') }}</label>
                 <div class="d-flex w-100 div-input">
 
-                    <input class="input-field" id="password-confirm" type="password" name="password_confirmation" id="password-content-3-6" placeholder="Your Password"
-                      minlength="8" required value="{{ old('password') }}" >
+                    <input class="input-field" id="password-confirm" type="password" name="password_confirmation" placeholder="Your Password" minlength="8" required value="{{ old('password') }}" >
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    <div onclick="togglePassword()">
+                    <div onclick="toggleConfirmPassword()">
                         <svg style="margin-left: 0.75rem; cursor:pointer" width="20" height="14" viewBox="0 0 20 14"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path id="icon-toggle" fill-rule="evenodd" clip-rule="evenodd"
@@ -285,21 +284,6 @@
                 </div> --}}
             </div>
 
-            {{-- <div style="margin-top: 1rem;">
-                <label for="" class="d-block input-label">Alamat</label>
-                <div class="d-flex w-100 div-input">
-                  <input class="input-field @error('alamat') is-invalid @enderror" type="text" name="alamat" id="alamat" placeholder="Alamat Pengguna" autocomplete="on"
-                    required value="{{ old('alamat') }}" >
-                    @error('alamat')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div> --}}
-            {{-- <div class="d-flex justify-content-end" style="margin-top: 0.75rem;">
-              <a href="#" class="forgot-password fst-italic">Forgot Password?</a>
-            </div> --}}
             <button class="btn btn-fill text-white d-block w-100" type="submit">{{ __('Daftar ke Aplikasi') }}</button>
           </form>
           <div class="row mt-3">
@@ -323,6 +307,20 @@
     <script>
       function togglePassword() {
         var x = document.getElementById("password-content-3-6");
+        if (x.type === "password") {
+          x.type = "text";
+          document
+            .getElementById("icon-toggle")
+            .setAttribute("fill", "#2ec49c");
+        } else {
+          x.type = "password";
+          document
+            .getElementById("icon-toggle")
+            .setAttribute("fill", "#CACBCE");
+        }
+      }
+      function toggleConfirmPassword() {
+        var x = document.getElementById("password-confirm");
         if (x.type === "password") {
           x.type = "text";
           document

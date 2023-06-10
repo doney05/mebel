@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('payment_details', function (Blueprint $table) {
             $table->id();
+            $table->string('midtrans_type');
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
             $table->unsignedBigInteger('alamat_tujuans_id');
@@ -20,6 +21,8 @@ return new class extends Migration
             $table->string('products_id');
             $table->string('qty');
             $table->integer('total');
+            $table->string('kurir')->nullable();
+            $table->integer('ongkir')->nullable();
             $table->string('status')->nullable();
             $table->string('payment_type')->nullable();
             $table->string('bank')->nullable();

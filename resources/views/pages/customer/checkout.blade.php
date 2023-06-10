@@ -1,6 +1,9 @@
 @extends('layouts.customer.app')
 
 @section('content')
+@php
+    $prod = $produk->keyBy('id')->toArray();
+@endphp
     <div class="title mb-4">
         <h4 class="m-b-lg">Checkout</h4>
     </div>
@@ -56,10 +59,10 @@
                     <p style="margin-top: -13px;">Rp. {{ number_format($alamat->ongkir) }}</p>
                     @if ($alamat->kurir == true)
                     <p style="margin-top: -13px;">{{ $alamat->kurir }}</p>
-                    <p style="margin-top: -13px;">Rp. {{ number_format($harga + $alamat->ongkir) }}</p>
+                    <p style="margin-top: -13px;">Rp. {{ number_format($harga_cart + $alamat->ongkir) }}</p>
                     @else
                     <p style="margin-top: -13px;">-</p>
-                    <p style="margin-top: -13px;">Rp. {{ number_format($harga) }}</p>
+                    <p style="margin-top: -13px;">Rp. {{ number_format($harga_cart) }}</p>
                     @endif
                 </div>
             </div>
@@ -76,7 +79,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($detail as $item)
+                    {{-- @php
+                        $hasil = explode(',', $payment_detail['products_id']);
+                        $qty = explode(',', $payment_detail['qty']);
+                    @endphp
+                    @foreach ($hasil as $h)
+                    <tr>
+                        @foreach ($qty as $q)
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $prod[$h]['name'] }}</td>
+                            <td>{{ $q }}</td>
+                            <td>Rp. {{ number_format($payment_detail['total']) }}</td>
+                            <td>Unpaid</td>
+                            @endforeach
+                        </tr>
+                    @endforeach --}}
+                    @foreach ($carts as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->product->name }}</td>

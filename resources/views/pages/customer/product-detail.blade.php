@@ -8,6 +8,49 @@
     </div>
     <div class="card">
         <div class="card-body">
+            @if ($products->stok == 0)
+            @if ($carts->where('products_id', $products->id)->count())
+                <div class="row">
+                    <div class="col-6">
+                        <img src="{{ Storage::url($products->images) }}" alt=""
+                        style="width: 100%">
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url('produk/'. Auth::user()->id) }}"><p style="font-weight: bold"><i class="fa-solid fa-arrow-left"></i> <span style="text-decoration: underline">Back</span></p></a>
+                        <h2 style="font-weight: bold">{{ $products->name }}</h2>
+                        <p>{{ $products->description }}</p>
+
+                        <p style="margin-top: 10px; margin-bottom: 0px"><span style="font-weight: bold">Berat :</span> {{ $products->weight }} <span style="text-transform: lowercase">(g)</span></p>
+                        <p style="margin-bottom: 0px"><span style="font-weight: bold">Stok :</span> {{ $products->stok }}</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <p><span style="font-weight: bold">Rp :</span> {{ number_format( $products->price )}}</p>
+                            </div>
+                            <div class="col-6">
+                                {{-- <button>-</button>
+                                <input type="number" name="qty" id="qty" value="1">
+                                <button>+</button> --}}
+                                <div class="input-group quantity">
+                                    <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
+                                        <span class="input-group-text">-</span>
+                                    </div>
+                                    <input type="text" name="qty" class="qty-input form-control" value="1" style="text-align: center;
+                                    background: none; border: none;">
+                                    <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer;">
+                                        <span class="input-group-text">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <button class="btn btn-success" style="color: black">Stok Habis</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @else
             @if ($carts->where('products_id', $products->id)->count())
                 <div class="row">
                     <div class="col-6">
@@ -90,6 +133,7 @@
                     </div>
                 </div>
             </form>
+            @endif
             @endif
         </div>
     </div>

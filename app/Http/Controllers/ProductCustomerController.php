@@ -6,6 +6,7 @@ use App\Models\AlamatTujuan;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\City;
+use App\Models\Payment;
 use App\Models\PaymentDetail;
 use App\Models\PesananDetail;
 use App\Models\Product;
@@ -20,9 +21,10 @@ class ProductCustomerController extends Controller
     {
         $carts = Cart::with(['user', 'product'])->where('users_id', Auth::user()->id)->get();
         $cart = Cart::where('users_id', Auth::user()->id)->count();
-        $pay = PaymentDetail::where('users_id', Auth::user()->id)->count();
+        $payD = PaymentDetail::where('users_id', Auth::user()->id)->where('status', '=', 'Paid')->count();
+        $pay = Payment::where('users_id', Auth::user()->id)->count();
 
-        return view('pages.customer.dashboard', compact('carts', 'cart', 'pay'));
+        return view('pages.customer.dashboard', compact('carts', 'cart', 'pay', 'payD'));
     }
     public function product($id)
     {
@@ -54,7 +56,7 @@ class ProductCustomerController extends Controller
     {
         $carts = Cart::with(['user', 'product'])->where('users_id', Auth::user()->id)->get();
         $provinces = Province::all();
-        $alamat = AlamatTujuan::with(['user', 'province', 'city', 'cartdetail'])->where('users_id', Auth::user()->id)->first();
+        $alamat = AlamatTujuan::with(['user', 'province', 'city', 'cartdetail'])->where('users_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
         $hasil = Cart::with(['user', 'product'])->where('users_id', Auth::user()->id)->count();
         $user = User::where('id', Auth::user()->id)->get()->toArray();
         // dd($user);

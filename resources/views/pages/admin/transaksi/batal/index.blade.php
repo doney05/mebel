@@ -34,11 +34,16 @@
                     </thead>
                     <tbody>
                         @foreach ($pays as $item)
-                            @if ($item['status'] == 'Unpaid')
+                            {{-- {{ dd($item) }} --}}
                               <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item['user']['name'] }}</td>
-                                <td>{{ count($item['payment']) }}</td>
+                                <td>
+                                    @php
+                                    $count = explode(',', $item['products_id']);
+                                    @endphp
+                                    {{ count($count) }} Produk
+                                </td>
                                 <td>Rp. {{ number_format($item['total']) }}</td>
                                 <td>-</td>
                                 <td style="color: red">{{ $item['status'] }}</td>
@@ -50,7 +55,6 @@
                                     </form>
                                 </td>
                               </tr>
-                            @endif
                         @endforeach
                     </tbody>
                 </table>

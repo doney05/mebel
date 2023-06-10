@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController as ControllersProductController;
 use App\Http\Controllers\ProductCustomerController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,9 @@ Route::get('history/{id}', [HistoryController::class, 'index'])->name('history.i
 Route::get('invoice/{id}', [HistoryController::class, 'invoice'])->name('history.invoice');
 
 
+// Route Profile
+Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+Route::put('update-profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::middleware(['auth', 'admin'])->namespace('ADMIN')->group(function() {
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');

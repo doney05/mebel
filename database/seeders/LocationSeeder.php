@@ -16,7 +16,7 @@ class LocationSeeder extends Seeder
     public function run(): void
     {
         $daftarProvinsi = Http::withHeaders([
-            'key' => 'efcf87824a2fd93eb0bf4ad016d676c8'
+            'key' => '6bb2c431fe7c74951f9486a94768a67a'
         ])->get('https://api.rajaongkir.com/starter/province');
 
         $provinsi = $daftarProvinsi['rajaongkir']['results'];
@@ -29,7 +29,7 @@ class LocationSeeder extends Seeder
         }
 
         $daftarKota = Http::withHeaders([
-            'key' => 'efcf87824a2fd93eb0bf4ad016d676c8'
+            'key' => '6bb2c431fe7c74951f9486a94768a67a'
         ])->get('https://api.rajaongkir.com/starter/city');
 
         $kota = $daftarKota['rajaongkir']['results'];

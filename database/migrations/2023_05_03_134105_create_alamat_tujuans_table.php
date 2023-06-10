@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
-            $table->integer('provinces_id');
-            $table->integer('cities_id');
+            $table->integer('provinces_id')->nullable();
+            $table->integer('cities_id')->nullable();
             $table->string('kurir')->nullable();
             $table->integer('ongkir')->nullable();
             $table->text('alamat')->nullable();
-            $table->string('phone')->unique();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }

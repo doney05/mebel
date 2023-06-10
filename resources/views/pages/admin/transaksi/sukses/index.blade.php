@@ -38,13 +38,13 @@
                         @foreach ($pays as $item)
                             @if ($item['status'] == 'Paid')
                               <tr>
-                                <td>{{ $loop->index }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td><a href="{{ url('admin/transaksi/sukses/invoice/'. $item['id']) }}" target="_blank">Lihat Invoice
                                     </a>
                                 </td>
                                 <td>{{ $item['user']['name'] }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item['updated_at'])->format('Y-m-d') }}</td>
-                                <td>{{ count($item['payment']) }}</td>
+                                <td>{{ count($item['payment']) }} Produk</td>
                                 <td>Rp. {{ number_format($item['total']) }}</td>
                                 <td>{{ $item['bank'] }}</td>
                                 <td style="color: green">{{ $item['status'] }}</td>
