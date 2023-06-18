@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->integer('number');
             $table->string('invoice');
             $table->date('tanggal');

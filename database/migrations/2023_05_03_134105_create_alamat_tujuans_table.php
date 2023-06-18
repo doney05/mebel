@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('alamat_tujuans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->integer('provinces_id')->nullable();
             $table->integer('cities_id')->nullable();
             $table->string('kurir')->nullable();

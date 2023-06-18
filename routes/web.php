@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataPembeliController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\RekapController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GoogleController;
@@ -81,6 +83,13 @@ Route::middleware(['auth', 'admin'])->namespace('ADMIN')->group(function() {
     Route::delete('admin/transaksi/sukses/delete/{id}', [TransaksiController::class, 'suksesDelete'])->name('transaksi.sukses.delete');
     Route::get('admin/transaksi/batal', [TransaksiController::class, 'batal'])->name('transaksi.batal');
     Route::delete('admin/transaksi/batal/delete/{id}', [TransaksiController::class, 'batalDelete'])->name('transaksi.batal.delete');
+    Route::get('admin/cetaksukses/{tglawal}/{tglakhir}', [TransaksiController::class, 'cetakSukses'])->name('cetakSukses');
+
+    //data rekap
+    Route::get('admin/rekap/index', [RekapController::class, 'index'])->name('rekap.index');
+    //data pembeli
+    Route::get('admin/data-pembeli/index', [DataPembeliController::class, 'index'])->name('data-pembeli.index');
+    Route::delete('admin/data-pembeli/delete/{id}', [DataPembeliController::class, 'destroy'])->name('data-pembeli.delete');
 });
 
 Route::get('redirect-google', [GoogleController::class, 'redirectGoogle'])->name('redirect-google');

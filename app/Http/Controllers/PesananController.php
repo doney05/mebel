@@ -12,6 +12,7 @@ use App\Models\Pesanan;
 use App\Models\PesananDetail;
 use App\Models\Product;
 use App\Models\ProductDetail;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,8 @@ class PesananController extends Controller
         $qty = join(',', $request->qty);
         $random1 = Str::random(5);
         $cartD = CartDetail::with(['user', 'cart'])->whereIn('carts_id', $request->carts_id)->get();
-
+        $user = User::find(Auth::user()->id);
+        // dd($user);
         // dd($request->all(), $products_id, $qty, $random1, $cartD);
         if (DB::table('cart_details')->whereIn('carts_id', $request->carts_id)->exists()) {
             $id_prod = array();
@@ -91,6 +93,7 @@ class PesananController extends Controller
             $payment_detail = PaymentDetail::where('users_id', Auth::user()->id)->count();
 
             $token = '2UkYTGKwmDGeeUtDW@qY';
+            $nama = $user->name;
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
@@ -104,7 +107,10 @@ class PesananController extends Controller
               CURLOPT_CUSTOMREQUEST => 'POST',
               CURLOPT_POSTFIELDS => array(
             'target' => $alamatTujuan->phone,
-            'message' => 'Hai. Masih ada barang di keranjang nih. Jangan lupa di checkout yaa...',
+            'message' => 'Hai '. $nama . '.
+Masih ada barang di keranjang Anda.
+
+Segera checkout dan lakukan pembayaran Anda. Terima Kasih.',
             'delay'=> '2-5',
             ),
               CURLOPT_HTTPHEADER => array(
@@ -142,6 +148,7 @@ class PesananController extends Controller
             $kuan = $request->qty;
             $weight = $request->weight;
             $price = $request->price;
+            $nama = $user->name;
 
             // save to model cart detail
             for ($i=0; $i < sizeof($product); $i++) {
@@ -189,7 +196,10 @@ class PesananController extends Controller
               CURLOPT_CUSTOMREQUEST => 'POST',
               CURLOPT_POSTFIELDS => array(
             'target' => $alamatTujuan->phone,
-            'message' => 'Hai. Masih ada barang di keranjang nih. Jangan lupa di checkout yaa...',
+            'message' => 'Hai '. $nama . '.
+            Masih ada barang di keranjang Anda.
+
+            Segera checkout dan lakukan pembayaran Anda. Terima Kasih.',
             'delay'=> '2-5',
             ),
               CURLOPT_HTTPHEADER => array(
@@ -219,11 +229,12 @@ class PesananController extends Controller
         $totalCart = Cart::with(['user', 'product'])->where('users_id', Auth::user()->id)->get()->sum('price');;
         $phone = AlamatTujuan::where('users_id', Auth::user()->id)->first()->toArray();
         $payment = PaymentDetail::with(['user', 'alamat'])->where('users_id', Auth::user()->id)->get()->toArray();
+        $pay = PaymentDetail::with(['user', 'alamat'])->where('users_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
         $produk = Product::all();
         $payment_detail = PaymentDetail::with(['user', 'alamat'])->where('users_id', Auth::user()->id)->first()->toArray();
-        // dd($carts);
+        // dd($pay);
 
-        if ($alamat->ongkir == null) {
+        if ($pay->ongkir == null) {
             $totalAll = $totalCart;
             // dd($totalAll);
             // Set your Merchant Server Key
@@ -251,9 +262,9 @@ class PesananController extends Controller
             // dd($params);
             $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-            return view('pages.customer.checkout', compact('carts', 'detail', 'hasil', 'harga', 'alamat', 'snapToken', 'produk', 'payment_detail', 'harga_cart'));
+            return view('pages.customer.checkout', compact('carts', 'detail', 'hasil', 'harga', 'alamat', 'snapToken', 'produk', 'pay','payment_detail', 'harga_cart'));
         }else {
-            $totalAll = $totalCart + $alamat->ongkir;
+            $totalAll = $totalCart + $pay->ongkir;
             // dd($totalAll);
             // Set your Merchant Server Key
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
@@ -281,7 +292,7 @@ class PesananController extends Controller
             $snapToken = \Midtrans\Snap::getSnapToken($params);
 
             // dd($harga_cart);
-            return view('pages.customer.checkout', compact('carts', 'detail', 'hasil', 'harga', 'alamat', 'snapToken', 'produk', 'payment_detail', 'harga_cart'));
+            return view('pages.customer.checkout', compact('carts', 'detail', 'hasil', 'harga', 'alamat', 'snapToken', 'produk', 'pay','payment_detail', 'harga_cart'));
         }
 
     }
@@ -419,11 +430,7 @@ class PesananController extends Controller
                             ];
                     // array_push($p, $pro);
                     DB::table('products')->where('id', $pro['id'])->update($pro);
-                    $terjual = [
-                        'products_id' => $buy[$i]['product']['id'],
-                        'jumlah' => $buy[$i]['qty'],
-                    ];
-                    DB::table('product_terjuals')->insert($terjual);
+
                 }
             }
         }else if ($request->transaction_status == 'settlement') {
@@ -464,6 +471,7 @@ class PesananController extends Controller
                 ];
                 DB::table('payments')->insert($data);
             }
+            DB::table('carts')->delete();
             $buy = Payment::with('product')->where('payment_details_id', $pay['id'])->get()->toArray();
             // dd($buy);
 
@@ -480,11 +488,7 @@ class PesananController extends Controller
                         ];
                 // array_push($p, $pro);
                 DB::table('products')->where('id', $pro['id'])->update($pro);
-                $terjual = [
-                    'products_id' => $buy[$i]['product']['id'],
-                    'jumlah' => $buy[$i]['qty'],
-                ];
-                DB::table('product_terjuals')->insert($terjual);
+
             }
             // dd($p);
         }
@@ -536,6 +540,9 @@ class PesananController extends Controller
     public function success($id)
     {
         $alamat = AlamatTujuan::where('users_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
+        $pay = PaymentDetail::with(['user', 'alamat'])->where('users_id', Auth::user()->id)->orderBy('id', 'DESC')->first();
+        $total = $pay->total + $pay->ongkir;
+        $nama = $pay->user->name;
         // dd($alamat);
         $token = '2UkYTGKwmDGeeUtDW@qY';
         $curl = curl_init();
@@ -551,7 +558,11 @@ class PesananController extends Controller
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
         'target' => $alamat->phone,
-        'message' => 'Pembayaran berhasil. Cek status pembayaran Anda di Aplikasi...',
+        'message' => 'Hai ' . $nama . '.
+Pembayaran berhasil dengan Rp. ' . number_format($total) . ' telah BERHASIL.
+
+Cetak struk pembayaran dan cek status pembayaran di Aplikasi.
+Terima Kasih',
         'delay'=> '2-5',
         ),
         CURLOPT_HTTPHEADER => array(

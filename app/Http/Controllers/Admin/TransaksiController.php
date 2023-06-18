@@ -51,4 +51,10 @@ class TransaksiController extends Controller
         // dd($pays);
         return redirect()->route('transaksi.batal');
     }
+    public function cetakSukses($tglawal, $tglakhir)
+    {
+        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.alamat', 'payment'])->whereBetween('updated_at', [$tglawal, $tglakhir])->orderBy('id', 'DESC')->get();
+        // dd($pays);
+        return view('pages.admin.transaksi.sukses.cetak', compact('pays'));
+    }
 }

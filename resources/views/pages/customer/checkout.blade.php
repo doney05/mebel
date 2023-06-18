@@ -56,10 +56,10 @@
                 </div>
                 <div class="col-6" style="text-align: end; font-size: 14px">
                     <p>{{ $hasil }} Produk</p>
-                    <p style="margin-top: -13px;">Rp. {{ number_format($alamat->ongkir) }}</p>
+                    <p style="margin-top: -13px;">Rp. {{ number_format($pay->ongkir) }}</p>
                     @if ($alamat->kurir == true)
-                    <p style="margin-top: -13px;">{{ $alamat->kurir }}</p>
-                    <p style="margin-top: -13px;">Rp. {{ number_format($harga_cart + $alamat->ongkir) }}</p>
+                    <p style="margin-top: -13px;">{{ $pay->kurir }}</p>
+                    <p style="margin-top: -13px;">Rp. {{ number_format($harga_cart + $pay->ongkir) }}</p>
                     @else
                     <p style="margin-top: -13px;">-</p>
                     <p style="margin-top: -13px;">Rp. {{ number_format($harga_cart) }}</p>

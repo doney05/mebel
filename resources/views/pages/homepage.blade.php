@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/glider.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('client/assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- // Add the new slick-theme.css if you want the default styling --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="{{ asset('client/assets/js/javascript.js') }}" defer></script>
 
     <style>
@@ -47,7 +50,9 @@
 <body>
     <!-----Header Nav Bar Starts-->
     <nav class="navbar">
-        <div class="brand-title">Mebelku</div>
+        <div class="brand-title" style="width: 20%; font-size: 20px">
+            <img src="{{ asset('client/assets/images/logo.png') }}" alt="" style="width:20%;"> Murah Prima Furniture
+        </div>
         <a href="#" class="toggle-button">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -93,7 +98,7 @@
     <section class="content" id="content" name="content">
 
         <!--Product Slider Section Starts-->
-        <div class="product-slider" id="product" style="margin-top: -50px;">
+        <div class="product-slider" id="product" style="margin-top: -107px;">
             <div class="product-slider-title" id="product-slider-title" style="justify-content: space-evenly;
             align-items: baseline;">
                 <span>
@@ -150,34 +155,87 @@
         <!---Product Slider Section Ends-->
 
         <!--Best Product Slider Section Starts-->
-        <div class="product-slider" id="product-slider best" style="margin-top: -20px;">
+        <div class="product-slider" id="product-slider best" style="    margin-top: -250px; height: 90vh">
             <div class="product-slider-title" id="product-slider-title">
-                Produk Terbaik
+                Review Ulasan
             </div>
-            <div class="glider-contain">
+            {{-- <div class="row"> --}}
+                <div class="multiple-items">
+                    <div class="card mx-3" style="border-radius: 10px">
+                        <div class="card-body">
+                            <div class="images d-flex justify-content-center">
+                                <img src="{{ asset('client/assets/img/review/profile.png') }}" alt="" class="rounded-circle" style="width: 20%; border: 3px solid red;">
+                            </div>
+                            <div class="name text-center mt-3">
+                                <h5>Customer Review</h5>
+                                <p>"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda reprehenderit unde at, temporibus asperiores quae necessitatibus doloremque. Nesciunt laudantium, facere cum dignissimos vero incidunt dolor, dolores sunt optio culpa accusamus?"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mx-3" style="border-radius: 10px">
+                        <div class="card-body">
+                            <div class="images d-flex justify-content-center">
+                                <img src="{{ asset('client/assets/img/review/man (1).png') }}" alt="" class="rounded-circle" style="width: 20%; border: 3px solid red;">
+                            </div>
+                            <div class="name text-center mt-3">
+                                <h5>Customer Review</h5>
+                                <p>"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda reprehenderit unde at, temporibus asperiores quae necessitatibus doloremque. Nesciunt laudantium, facere cum dignissimos vero incidunt dolor, dolores sunt optio culpa accusamus?"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mx-3" style="border-radius: 10px">
+                        <div class="card-body">
+                            <div class="images d-flex justify-content-center">
+                                <img src="{{ asset('client/assets/img/review/man.png') }}" alt="" class="rounded-circle" style="width: 20%; border: 3px solid red;">
+                            </div>
+                            <div class="name text-center mt-3">
+                                <h5>Customer Review</h5>
+                                <p>"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda reprehenderit unde at, temporibus asperiores quae necessitatibus doloremque. Nesciunt laudantium, facere cum dignissimos vero incidunt dolor, dolores sunt optio culpa accusamus?"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mx-3" style="border-radius: 10px">
+                        <div class="card-body">
+                            <div class="images d-flex justify-content-center">
+                                <img src="{{ asset('client/assets/img/review/woman.png') }}" alt="" class="rounded-circle" style="width: 20%; border: 3px solid red;">
+                            </div>
+                            <div class="name text-center mt-3">
+                                <h5>Customer Review</h5>
+                                <p>"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda reprehenderit unde at, temporibus asperiores quae necessitatibus doloremque. Nesciunt laudantium, facere cum dignissimos vero incidunt dolor, dolores sunt optio culpa accusamus?"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mx-3" style="border-radius: 10px">
+                        <div class="card-body">
+                            <div class="images d-flex justify-content-center">
+                                <img src="{{ asset('client/assets/img/review/leprechaun.png') }}" alt="" class="rounded-circle" style="width: 20%; border: 3px solid red;">
+                            </div>
+                            <div class="name text-center mt-3">
+                                <h5>Customer Review</h5>
+                                <p>"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda reprehenderit unde at, temporibus asperiores quae necessitatibus doloremque. Nesciunt laudantium, facere cum dignissimos vero incidunt dolor, dolores sunt optio culpa accusamus?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{-- </div> --}}
+            {{-- <div class="glider-contain">
                 <div class="glider-best" id="glider-best">
-                    @foreach ($terjual as $jual)
                     <div class="product-card" id="product-card">
                         <div class="product-img" id="product-img">
-                            <img src="{{ Storage::url($jual->product->images) }}" alt="armchair">
+                            <img src="{{ asset('client/assets/images/logo.png') }}" alt="armchair">
                         </div>
 
                         <div class="product-card-bottom" id="product-card-bottom">
                             <div class="product-title" id="product-title">
-                                {{ $jual->product->name }}
+                                Customer Review
                             </div>
-                            <div class="star-rating" id="star-rating">
-                                <span class="price-text">Terjual: {{ $terjuals }}</span>
-                            </div>
+
                             <div class="product-price" id="product-price">
-                                <span class="price-text">Rp. {{ number_format($jual->product->price) }}</span>
+                                <p class="price-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non libero earum laudantium alias accusamus, vero cum nostrum accusantium quasi eaque tempore, corrupti voluptate eveniet quos quam expedita fugiat. Illo, enim!</p>
                             </div>
 
                         </div>
                     </div>
-
-                    @endforeach
-
                 </div>
 
                 <button aria-label="Previous" class="glider-prev-best">
@@ -191,7 +249,7 @@
                     </div>
                 </button>
                 <div role="tablist" class="dots-best"></div>
-            </div>
+            </div> --}}
         </div>
 
         <!---Best Product Slider Section Ends-->
@@ -228,7 +286,58 @@
     <!---js-script for Product Slider codes starts------->
     <script src="{{ asset('client/assets/js/glider.js') }}"></script>
 
+    <!---Testimonial JavaScript Code starts-->
+    {{-- <script src="{{ asset('client/assets/js/jquery.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.slim.js" integrity="sha512-JC/KiiKXoc40I1lqZUnoRQr96y5/q4Wxrq5w+WKqbg/6Aq0ivpS2oZ24x/aEtTRwxahZ/KOApxy8BSZOeLXMiA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('client/assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/owl-script.js') }}"></script>
+    {{-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> --}}
+
+
+    <!----Testimonial JavaScript Code Ends-->
+
     <script>
+         $(document).ready(function () {
+            $('.multiple-items').slick({
+                dots: true,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                responsive: [
+                    {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                    },
+                    {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                    },
+                    {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ]
+                });
+        })
         new Glider(document.querySelector('.glider'), {
             slidesToScroll: 1,
             slidesToShow: 4,
@@ -281,68 +390,63 @@
             }
         });
     </script>
-    <script>
-        new Glider(document.querySelector('.glider-best'), {
-            slidesToScroll: 1,
-            slidesToShow: 4,
-            responsive: [
-            {
-                    // If Screen Size More than 768px
-                    breakpoint: 0,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        duration: 0.5,
-                        arrows: {
-                            prev: ".glider-prev-best",
-                            next: ".glider-next-best"
-                        }
-                    }
-                },
-            {
-                    // If Screen Size More than 768px
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        duration: 0.5,
-                        arrows: {
-                            prev: ".glider-prev-best",
-                            next: ".glider-next-best"
-                        }
-                    }
-                },
-                {
-                    // If Screen Size More than 1024px
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                        duration: 0.5,
-                        arrows: {
-                            prev: ".glider-prev-best",
-                            next: ".glider-next-best"
-                        }
-                    }
-                }
-            ],
-            draggable: true,
-            dots: '.dots-best',
-            arrows: {
-                prev: '.glider-prev-best',
-                next: '.glider-next-best'
-            }
-        });
+
+    <script type="text/javascript">
+
+        // new Glider(document.querySelector('.glider-best'), {
+        //     slidesToScroll: 1,
+        //     slidesToShow: 4,
+        //     responsive: [
+        //     {
+        //             // If Screen Size More than 768px
+        //             breakpoint: 0,
+        //             settings: {
+        //                 slidesToShow: 1,
+        //                 slidesToScroll: 1,
+        //                 duration: 0.5,
+        //                 arrows: {
+        //                     prev: ".glider-prev-best",
+        //                     next: ".glider-next-best"
+        //                 }
+        //             }
+        //         },
+        //     {
+        //             // If Screen Size More than 768px
+        //             breakpoint: 768,
+        //             settings: {
+        //                 slidesToShow: 2,
+        //                 slidesToScroll: 1,
+        //                 duration: 0.5,
+        //                 arrows: {
+        //                     prev: ".glider-prev-best",
+        //                     next: ".glider-next-best"
+        //                 }
+        //             }
+        //         },
+        //         {
+        //             // If Screen Size More than 1024px
+        //             breakpoint: 1024,
+        //             settings: {
+        //                 slidesToShow: 4,
+        //                 slidesToScroll: 1,
+        //                 duration: 0.5,
+        //                 arrows: {
+        //                     prev: ".glider-prev-best",
+        //                     next: ".glider-next-best"
+        //                 }
+        //             }
+        //         }
+        //     ],
+        //     draggable: true,
+        //     dots: '.dots-best',
+        //     arrows: {
+        //         prev: '.glider-prev-best',
+        //         next: '.glider-next-best'
+        //     }
+        // });
     </script>
     <!-----js-script for Product Slider code ends------>
 
-    <!---Testimonial JavaScript Code starts-->
-    <script src="{{ asset('client/assets/js/jquery.js') }}"></script>
-    <script src="{{ asset('client/assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('client/assets/js/owl-script.js') }}"></script>
-
-
-    <!----Testimonial JavaScript Code Ends-->
 
     <!-----Footer Section stars here-->
     <footer>

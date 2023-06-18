@@ -20,7 +20,7 @@
     <!-- start with head -->
     <div class="head">
       <div class="logo">
-        <img src="{{ asset('admin/assets/img/logo-admin.png') }}" alt="">
+        <img src="{{ asset('client/assets/images/logo.png') }}" alt="">
       </div>
       {{-- <a href="#" class="btn btn-danger">SUBMIT new MOVIE</a> --}}
     </div>

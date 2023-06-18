@@ -10,6 +10,8 @@
         <a href="{{ url('admin/transaksi/sukses') }}" class="nav-link" data-parent="#menu3">Sukses</a>
         <a href="{{ url('admin/transaksi/batal') }}" class="nav-link" data-parent="#menu3">Batal</a>
     </li>
+    {{-- <li class="nav-item"><a href="{{ url('admin/rekap/index') }}" class="nav-link"><i class="fa fa-cart-shopping"></i>Rekap Penjualan</a></li> --}}
+    <li class="nav-item"><a href="{{ url('admin/data-pembeli/index') }}" class="nav-link"><i class="fa fa-users"></i>Data Pembeli</a></li>
     {{-- <li class="nav-item"><a href="contacts.html" class="nav-link"><i class="fa fa-user"></i>contact</a></li>
     <li class="nav-item"><a href="forms.html" class="nav-link"><i class="fa fa-edit"></i>forms</a></li>
     <li class="nav-item"><a href="tabels.html" class="nav-link"><i class="fa fa-table"></i>tables</a></li>

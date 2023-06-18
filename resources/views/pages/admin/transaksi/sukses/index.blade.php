@@ -20,6 +20,30 @@
         @endif
         <div class="card">
             <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="">Tanggal Awal</label>
+                            <input type="date" class="form-control" name="tglawal" id="tglawal">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="">Tanggal Akhir</label>
+                            <input type="date" class="form-control" name="tglakhir" id="tglakhir">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="simpan mt-4">
+                            <a href="" onclick="this.href='/admin/cetaksukses/'+ document.getElementById('tglawal').value + '/' +
+                            document.getElementById('tglakhir').value" target="_blank" class="btn btn-primary">Cetak Laporan <i class="fas fa-print"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
                 <table id="example" class="table table-striped" style="width:100%;">
                     <thead>
                         <tr>

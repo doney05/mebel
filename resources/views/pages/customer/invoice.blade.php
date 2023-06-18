@@ -47,7 +47,18 @@
             <div class="pembeli mb-4">
                 <div class="row">
                     <div class="col-6">
-
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="images d-flex justify-content-end">
+                                    <img src="{{ asset('client/assets/images/logo.png') }}" alt="" style="width:60%;">
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <p class="untuk">Penjual</p>
+                                <p>Murah Prima Furniture</p>
+                                <p>Jl. Gondangmanis, Gondangmanis, Bae, Kudus</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-6">
                         <p class="untuk">Untuk</p>
