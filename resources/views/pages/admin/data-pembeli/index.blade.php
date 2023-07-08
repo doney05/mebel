@@ -28,7 +28,7 @@
                             <th>Email</th>
                             <th>No. Hp</th>
                             <th>Alamat</th>
-                            <th>Jumlah Beli</th>
+                            <th>Nominal Transaksi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -38,9 +38,26 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
+                            @if (empty($item->alamat()->latest()->first()->phone))
+                                <td>-</td>
+                                <td>-</td>
+                                <td>Rp {{ number_format(\App\Models\PaymentDetail::where('users_id', $item->id)->where('status', 'Paid')->sum('total')) }} </td>
+                                <td>
+                                    <form action="{{ route('data-pembeli.delete', $item->id) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    </form>
+                                </td>
+
+                            @else
+
                             <td>{{ $item->alamat()->latest()->first()->phone }}</td>
                             <td>{{ $item->alamat()->latest()->first()->alamat }}</td>
-                            <td>{{ count($item->paymentdetail) }} Produk</td>
+                            <td>Rp {{ number_format(\App\Models\PaymentDetail::where('users_id', $item->id)->where('status', 'Paid')->sum('total')) }} </td>
                             <td>
                                 <form action="{{ route('data-pembeli.delete', $item->id) }}" method="POST"
                                 class="d-inline">
@@ -51,6 +68,7 @@
                                 </button>
                                 </form>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

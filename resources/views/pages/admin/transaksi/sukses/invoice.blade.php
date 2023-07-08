@@ -12,7 +12,7 @@
     <link rel="icon" href="{{ asset('admin/assets/img/log.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Invoice</title>
+    <title>Bukti Pembayaran</title>
 </head>
 <style>
     .left{
@@ -41,13 +41,24 @@
     <section class="header ">
         <div class="container">
             <div class="left mt-5">
-                <h5>INVOICE</h5>
+                <h5>Bukti Pembayaran</h5>
                 <p>{{ $pay[0]['payment'][0]['invoice']['invoice'] }}</p>
             </div>
             <div class="pembeli mb-4">
                 <div class="row">
                     <div class="col-6">
-
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="images d-flex justify-content-end">
+                                    <img src="{{ asset('client/assets/images/logo.png') }}" alt="" style="width:60%;">
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <p class="untuk">Penjual</p>
+                                <p>Murah Prima Furniture</p>
+                                <p>Jl. Raya Kudus - Colo, Cendono Wetan, Cendono, Kec. Dawe, Kabupaten Kudus, Jawa Tengah 59353</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-6">
                         <p class="untuk">Untuk</p>
@@ -129,7 +140,7 @@
                                 <p>Total Ongkos Kirim</p>
                             </div>
                             <div class="col-6">
-                                <p>Rp. {{ number_format($pay[0]['alamat']['ongkir']) }}</p>
+                                <p>Rp. {{ number_format($pay[0]['ongkir']) }}</p>
                             </div>
                         </div>
                         <div class="row belanja">
@@ -137,7 +148,7 @@
                                 <p>TOTAL BELANJA</p>
                             </div>
                             <div class="col-6">
-                                <p>Rp. {{ number_format($total + $pay[0]['alamat']['ongkir']) }}</p>
+                                <p>Rp. {{ number_format($total + $pay[0]['ongkir']) }}</p>
                             </div>
                         </div>
                     </div>
@@ -147,7 +158,7 @@
             <div class="bayar mb-5">
                 <div class="row">
                     <div class="col-6">
-                        <p>Kurir <br> <span style="font-weight:bold">{{ $pay[0]['alamat']['kurir'] }}</span></p>
+                        <p>Kurir <br> <span style="font-weight:bold">{{ $pay[0]['kurir'] }}</span></p>
                     </div>
                     <div class="col-6">
                         <p>Metode Pembayaran <br> <span style="font-weight:bold">{{ $pay[0]['bank'] }}</span></p>

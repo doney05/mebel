@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                                 <div class="total-sub mx-5 text-center mt-3">
-                                    <h6>Grand Total</h6>
+                                    <h6>Total Semua</h6>
                                     <p>Rp. {{ number_format($item->price )}}</p>
                                 </div>
                                 <div class="remove">
@@ -83,7 +83,7 @@
                         <p style="font-size: 14px; font-weight: bold;">Rp. {{ number_format($total) }}</p>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">Checkout</button>
+                        <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">Bayar</button>
                     </div>
                 </div>
             </div>
@@ -174,8 +174,8 @@
                     @endif
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button onclick="myFunction()" type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
       </div>
@@ -214,6 +214,13 @@
     </style>
 @endpush
 @push('script')
+
+    <script>
+    function myFunction() {
+      alert("Anda akan dialihkan ke halaman checkout! Pastikan produk sesuai keinginan Anda.");
+    }
+    </script>
+
     <script>
          $(document).ready(function () {
             $('.increment-btn').click(function (e) {

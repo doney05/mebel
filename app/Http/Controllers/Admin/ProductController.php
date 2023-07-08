@@ -45,7 +45,7 @@ class ProductController extends Controller
                 'error' => $validator->errors()
             ]);
         }
-        $foto = $request->file('images')->store('public/images');
+        $foto = $request->file('images')->store('public');
         $data = [
             'images' => $foto,
             'name' => $request->name,
@@ -100,7 +100,7 @@ class ProductController extends Controller
             if ($request->oldImage) {
                 Storage::delete( $request->oldImage);
             }
-            $foto = $request->file('images')->store('public/images');
+            $foto = $request->file('images')->store('public');
         }
         $data = [
             'images' => $foto,

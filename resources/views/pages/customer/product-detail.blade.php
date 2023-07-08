@@ -1,10 +1,10 @@
 @extends('layouts.customer.app')
 @section('title')
-    Product Detail - Customer
+    Detail Produk - Customer
 @endsection
 @section('content')
     <div class="title mb-4">
-        <h4 class="m-b-lg">Product Detail</h4>
+        <h4 class="m-b-lg">Detail Produk</h4>
     </div>
     <div class="card">
         <div class="card-body">
@@ -16,7 +16,7 @@
                         style="width: 100%">
                     </div>
                     <div class="col-6">
-                        <a href="{{ url('produk/'. Auth::user()->id) }}"><p style="font-weight: bold"><i class="fa-solid fa-arrow-left"></i> <span style="text-decoration: underline">Back</span></p></a>
+                        <a href="{{ url('produk/'. Auth::user()->id) }}"><p style="font-weight: bold"><i class="fa-solid fa-arrow-left"></i> <span style="text-decoration: underline">Kembali</span></p></a>
                         <h2 style="font-weight: bold">{{ $products->name }}</h2>
                         <p>{{ $products->description }}</p>
 
@@ -58,7 +58,7 @@
                         style="width: 100%">
                     </div>
                     <div class="col-6">
-                        <a href="{{ url('produk/'. Auth::user()->id) }}"><p style="font-weight: bold"><i class="fa-solid fa-arrow-left"></i> <span style="text-decoration: underline">Back</span></p></a>
+                        <a href="{{ url('produk/'. Auth::user()->id) }}"><p style="font-weight: bold"><i class="fa-solid fa-arrow-left"></i> <span style="text-decoration: underline">Kembali</span></p></a>
                         <h2 style="font-weight: bold">{{ $products->name }}</h2>
                         <p>{{ $products->description }}</p>
 
@@ -86,7 +86,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-6">
-                                <button class="btn btn-success" style="color: black">In Cart</button>
+                                <button class="btn btn-success" style="color: black">Keranjang</button>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                         style="width: 100%">
                     </div>
                     <div class="col-6">
-                        <a href="{{ url('produk/'. Auth::user()->id) }}"><p style="font-weight: bold"><i class="fa-solid fa-arrow-left"></i> <span style="text-decoration: underline">Back</span></p></a>
+                        <a href="{{ url('produk/'. Auth::user()->id) }}"><p style="font-weight: bold"><i class="fa-solid fa-arrow-left"></i> <span style="text-decoration: underline">Kembali</span></p></a>
                         <h2 style="font-weight: bold">{{ $products->name }}</h2>
                         <p>{{ $products->description }}</p>
 

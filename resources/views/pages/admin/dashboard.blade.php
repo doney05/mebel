@@ -44,7 +44,7 @@
           <div class="icon"><i class="fa fa-users"></i></div>
           <div class="text">
             <h1>{{ $user }}</h1>
-            <p>Total Customer</p>
+            <p>Total Pelanggan</p>
           </div>
         </div>
       </div>

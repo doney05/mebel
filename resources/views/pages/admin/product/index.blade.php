@@ -1,15 +1,15 @@
 @extends('layouts.admin.app')
 @section('title')
-    Product - Admin
+    Produk - Admin
 @endsection
 @section('content')
         <div class="row d-flex mb-4">
             <div class="col-6">
-                <h4 class="m-b-lg">Product</h4>
+                <h4 class="m-b-lg">Produk</h4>
             </div>
             <div class="col-6 text-end">
                 <a href="{{ url('admin/product/create') }}" class="btn btn-primary"
-                style="text-decoration: none;">Tambah Product</a>
+                style="text-decoration: none;">Tambah Produk</a>
             </div>
         </div><!-- END column -->
 

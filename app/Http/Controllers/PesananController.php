@@ -383,18 +383,75 @@ Segera checkout dan lakukan pembayaran Anda. Terima Kasih.',
         // dd($serverKey);
         if ($hashed == $request->signature_key) {
             // dd($request->transaction_status);
-            if ($request->transaction_status == 'capture') {
-                $pay = PaymentDetail::with('alamat')->where('midtrans_type', $request->order_id)->first();
+                if ($request->transaction_status == 'capture') {
+                    $pay = PaymentDetail::with('alamat')->where('midtrans_type', $request->order_id)->first();
+                    $paytype = $request->payment_type;
+                    $pay->update([
+                                'total' => $request->gross_amount,
+                                'status' => 'Paid',
+                                'payment_type' => $paytype,
+                                'bank' => $request->bank
+                                ]);
+
+                    $cart = Cart::with(['user', 'product'])->get()->toArray();
+                    // dd($pay);
+
+                    for ($j=0; $j < sizeof($cart); $j++) {
+                        $pesan = [
+                            'users_id' =>$cart[$j]['user']['id'],
+                            'tanggal' => Carbon::now(),
+                        ];
+                        $invoice = Invoice::create($pesan);
+                        $data = [
+                            'users_id' =>$cart[$j]['user']['id'],
+                            'alamat_tujuans_id' => $pay->alamat->id,
+                            'products_id' => $cart[$j]['product']['id'],
+                            'invoices_id' => $invoice->id,
+                            'payment_details_id' => $pay->id,
+                            'qty' => $cart[$j]['qty'],
+                            'weight' => $cart[$j]['weight'],
+                            'price' => $cart[$j]['price'],
+                        ];
+                        DB::table('payments')->insert($data);
+                    }
+                    DB::table('carts')->delete();
+                    $buy = Payment::with('product')->where('payment_details_id', $pay['id'])->get()->toArray();
+                    // dd($buy);
+
+                    // $prods = Product::where('id', $pay)->get()->toArray();
+                    // $p = array();
+                    for ($i=0; $i < sizeof($buy); $i++) {
+                        $pro = [
+                                'id' => $buy[$i]['product']['id'],
+                                'images' => $buy[$i]['product']['images'],
+                                'name' => $buy[$i]['product']['name'],
+                                'price' => $buy[$i]['product']['price'],
+                                'weight' => $buy[$i]['product']['weight'],
+                                'stok' => $buy[$i]['product']['stok'] - $buy[$i]['qty']
+                                ];
+                        // array_push($p, $pro);
+                        DB::table('products')->where('id', $pro['id'])->update($pro);
+
+                    }
+                } else if ($request->transaction_status == 'settlement') {
                 $paytype = $request->payment_type;
-                $pay->update([
-                            'total' => $request->gross_amount,
-                            'status' => 'Paid',
-                            'payment_type' => $paytype,
-                            'bank' => $request->bank
-                            ]);
+                $van = $request->va_numbers;
+                $va = $van[0]['va_number'];
+                $bank = $van[0]['bank'];
+                // dd($paytype, $va, $bank);
+                $pay = PaymentDetail::with('alamat')->where('midtrans_type', $request->order_id)->first();
+
+                $p = ([
+                        'total' => $request->gross_amount,
+                        'status' => 'Paid',
+                        'payment_type' => $paytype,
+                        'bank' => $bank,
+                        'va_number' => $va
+                        ]);
+                $pay->update($p);
 
                 $cart = Cart::with(['user', 'product'])->get()->toArray();
-                // dd($pay);
+                // dd($cart);
 
                 for ($j=0; $j < sizeof($cart); $j++) {
                     $pesan = [
@@ -414,6 +471,7 @@ Segera checkout dan lakukan pembayaran Anda. Terima Kasih.',
                     ];
                     DB::table('payments')->insert($data);
                 }
+                DB::table('carts')->delete();
                 $buy = Payment::with('product')->where('payment_details_id', $pay['id'])->get()->toArray();
                 // dd($buy);
 
@@ -432,65 +490,8 @@ Segera checkout dan lakukan pembayaran Anda. Terima Kasih.',
                     DB::table('products')->where('id', $pro['id'])->update($pro);
 
                 }
+                // dd($p);
             }
-        }else if ($request->transaction_status == 'settlement') {
-            $paytype = $request->payment_type;
-            $van = $request->va_numbers;
-            $va = $van[0]['va_number'];
-            $bank = $van[0]['bank'];
-            // dd($paytype, $va, $bank);
-            $pay = PaymentDetail::with('alamat')->where('midtrans_type', $request->order_id)->first();
-
-            $p = ([
-                    'total' => $request->gross_amount,
-                    'status' => 'Paid',
-                    'payment_type' => $paytype,
-                    'bank' => $bank,
-                    'va_number' => $va
-                    ]);
-            $pay->update($p);
-
-            $cart = Cart::with(['user', 'product'])->get()->toArray();
-            // dd($cart);
-
-            for ($j=0; $j < sizeof($cart); $j++) {
-                $pesan = [
-                    'users_id' =>$cart[$j]['user']['id'],
-                    'tanggal' => Carbon::now(),
-                ];
-                $invoice = Invoice::create($pesan);
-                $data = [
-                    'users_id' =>$cart[$j]['user']['id'],
-                    'alamat_tujuans_id' => $pay->alamat->id,
-                    'products_id' => $cart[$j]['product']['id'],
-                    'invoices_id' => $invoice->id,
-                    'payment_details_id' => $pay->id,
-                    'qty' => $cart[$j]['qty'],
-                    'weight' => $cart[$j]['weight'],
-                    'price' => $cart[$j]['price'],
-                ];
-                DB::table('payments')->insert($data);
-            }
-            DB::table('carts')->delete();
-            $buy = Payment::with('product')->where('payment_details_id', $pay['id'])->get()->toArray();
-            // dd($buy);
-
-            // $prods = Product::where('id', $pay)->get()->toArray();
-            // $p = array();
-            for ($i=0; $i < sizeof($buy); $i++) {
-                $pro = [
-                        'id' => $buy[$i]['product']['id'],
-                        'images' => $buy[$i]['product']['images'],
-                        'name' => $buy[$i]['product']['name'],
-                        'price' => $buy[$i]['product']['price'],
-                        'weight' => $buy[$i]['product']['weight'],
-                        'stok' => $buy[$i]['product']['stok'] - $buy[$i]['qty']
-                        ];
-                // array_push($p, $pro);
-                DB::table('products')->where('id', $pro['id'])->update($pro);
-
-            }
-            // dd($p);
         }
 
 

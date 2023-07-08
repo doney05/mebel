@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\PaymentDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class TransaksiController extends Controller
 {
     public function sukses()
     {
-        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.payment.product', 'payment'])->orderBy('id', 'DESC')->get()->toArray();
+        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.payment.product', 'payment'])->where('status', '=', 'Paid')->get();
         // $totalProduk = count($pays[0]['user']['payment']);
 
         // dd($pays);
@@ -36,7 +36,7 @@ class TransaksiController extends Controller
     }
     public function batal()
     {
-        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.payment.product', 'payment'])->where('status', '=', 'Unpaid')->orderBy('id', 'DESC')->get()->toArray();
+        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.payment.product', 'payment'])->where('status', '=', 'Unpaid')->get()->toArray();
         // $totalProduk = count($pays[0]['user']['payment']);
 
         // dd($pays);
@@ -53,8 +53,7 @@ class TransaksiController extends Controller
     }
     public function cetakSukses($tglawal, $tglakhir)
     {
-        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.alamat', 'payment'])->whereBetween('updated_at', [$tglawal, $tglakhir])->orderBy('id', 'DESC')->get();
-        // dd($pays);
+        $pays = PaymentDetail::with(['user.payment','user.invoice', 'user.alamat', 'payment'])->whereBetween('updated_at', [$tglawal, $tglakhir])->where('status', '=', 'Paid')->get();
         return view('pages.admin.transaksi.sukses.cetak', compact('pays'));
     }
 }

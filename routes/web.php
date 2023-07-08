@@ -94,10 +94,11 @@ Route::middleware(['auth', 'admin'])->namespace('ADMIN')->group(function() {
 
 Route::get('redirect-google', [GoogleController::class, 'redirectGoogle'])->name('redirect-google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google-login-callback');
-
+Route::get('login/index', [LoginController::class, 'index'])->name('login.index');
+Route::post('login/store', [LoginController::class, 'store'])->name('login.store');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes(['verify' => true]);
-

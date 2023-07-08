@@ -39,14 +39,14 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="weight">Berat Produk (g)</label>
+                    <label for="weight">Berat Produk (gr)</label>
                     <input type="text" name="weight" id="weight" class="form-control @error('weight') is-invalid @enderror" required>
                     @error('weight')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                    <p style="color: red">harus diisi dengan angka</p>
+                    <p style="color: red">harus diisi dengan angka! Maks. 30000gr/30kg</p>
                 </div>
                 <div class="form-group">
                     <label for="stok">Stok</label>

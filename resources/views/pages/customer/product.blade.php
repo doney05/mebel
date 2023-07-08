@@ -1,10 +1,10 @@
 @extends('layouts.customer.app')
 @section('title')
-    Product - Customer
+    Produk - Customer
 @endsection
 @section('content')
     <div class="title mb-4">
-        <h4 class="m-b-lg">Product</h4>
+        <h4 class="m-b-lg">Produk</h4>
     </div>
     <div class="product">
         <div class="row">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                         @if ($carts->where('products_id', $item->id)->count())
-                            <button class="btn btn-success" style="color: black">In Cart</button>
+                            <button class="btn btn-success" style="color: black">Keranjang</button>
                         @else
                         <form action="{{ url('add-to-cart/'.$item->id) }}">
                                 <input type="hidden" name="qty" value="1">

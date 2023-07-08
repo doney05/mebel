@@ -48,8 +48,8 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Invoice</th>
-                            <th>Nama Customer</th>
+                            <th>Bukti Bayar</th>
+                            <th>Nama Pelanggan</th>
                             <th>Tanggal Beli</th>
                             <th>Jumlah Produk</th>
                             <th>Total Harga</th>
@@ -60,10 +60,9 @@
                     </thead>
                     <tbody>
                         @foreach ($pays as $item)
-                            @if ($item['status'] == 'Paid')
-                              <tr>
+                                <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ url('admin/transaksi/sukses/invoice/'. $item['id']) }}" target="_blank">Lihat Invoice
+                                <td><a href="{{ url('admin/transaksi/sukses/invoice/'. $item['id']) }}" target="_blank">Lihat Bukti Pembayaran
                                     </a>
                                 </td>
                                 <td>{{ $item['user']['name'] }}</td>
@@ -71,7 +70,9 @@
                                 <td>{{ count($item['payment']) }} Produk</td>
                                 <td>Rp. {{ number_format($item['total']) }}</td>
                                 <td>{{ $item['bank'] }}</td>
-                                <td style="color: green">{{ $item['status'] }}</td>
+                                @if ($item->status == 'Paid')
+                                <td style="color: green">Dibayar</td>
+                                @endif
                                 <td>
                                     <form action="{{ url('admin/transaksi/sukses/delete/'. $item['id']) }}" method="POST">
                                         @csrf
@@ -80,7 +81,6 @@
                                     </form>
                                 </td>
                               </tr>
-                            @endif
                         @endforeach
                     </tbody>
                 </table>

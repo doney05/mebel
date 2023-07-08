@@ -24,7 +24,7 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Customer</th>
+                            <th>Nama Pelanggan</th>
                             <th>Jumlah Produk</th>
                             <th>Total Harga</th>
                             <th>Pembayaran</th>

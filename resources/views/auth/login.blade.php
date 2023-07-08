@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -8,7 +7,7 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     </head>
     <body>
-       <section class="h-100 w-100" style="box-sizing: border-box; background-color: #232130">
+       <section class="w-100" style="box-sizing: border-box; background-color: #232130; max-height: auto;">
     <style scoped>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -199,7 +198,7 @@
           <h3 class="title-text">Masuk untuk Melanjutkan</h3>
           <p class="caption-text">Silahkan login menggunakan akun yang <br>
             terdaftar di situs web.</p>
-          <form style="margin-top: 1.5rem;" action="{{ url('login') }}" method="post">
+          <form style="margin-top: 1.5rem;" action="{{ url('login/store') }}" method="post">
             @csrf
             <div style="margin-bottom: 1.75rem;">
               <label for="" class="d-block input-label">Email</label>

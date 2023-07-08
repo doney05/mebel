@@ -1,12 +1,12 @@
 <div class="left">
     <button id="on" class="btn btn-info"><i class="fa fa-bars"></i></button>
     <button id="off" class="btn btn-info hide"><i class="fa fa-align-left"></i></button>
-    <a href="{{ url('/') }}" class="btn btn-info hidden-xs-down"><i class="fa fa-home"></i>Back Home</a>
+    <a href="{{ url('/') }}" class="btn btn-info hidden-xs-down"><i class="fa fa-home"></i>Beranda</a>
   </div>
   <div class="right">
         <div class="dropdown cart">
             <button type="button" class="btn btn-primary" data-toggle="dropdown">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ $carts->count() }}</span>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Keranjang <span class="badge badge-pill badge-danger">{{ $carts->count() }}</span>
             </button>
             <div class="dropdown-menu" style="margin-top: 30px">
                 <div class="row total-header-section">
@@ -36,7 +36,7 @@
 
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-                        <a href="#" class="btn btn-block">View all</a>
+                        <a href="{{  url('keranjang/'. Auth::user()->id) }}" class="btn btn-block">Lihat Semua</a>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
             @csrf
             {{-- <a class="dropdown-item" href="#">log out</a> --}}
             <button class="btn btn-login dropdown-item" type="submit" style="padding: 15px 30px; color: #8da2b7;">
-                log out
+                Keluar
             </button>
         </form>
      </div>

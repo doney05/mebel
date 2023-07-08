@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    top: 7%;
+    top: 2%;
     background-color: transparent;
     display: flex;
     width: 90%;
@@ -202,12 +202,11 @@ input::placeholder {
 
 .product-slider {
     margin-top: 90px;
-    height: 906px;
+    height: 830px;
     width: 100%;
     padding-left: 5%;
     padding-right: 5%;
     background-color: #F7F7F7;
-
 }
 
 
@@ -792,7 +791,7 @@ footer {
     }
 
     .navbar .navbar-links ul li {
-        text-align: center;
+        text-align: start;
         height: 35px;
         width: 100%;
         padding-top: 7px;
@@ -826,6 +825,7 @@ footer {
 
     .navbar-links.active {
         display: flex;
+        text-align: left;
 
     }
 
@@ -841,11 +841,15 @@ footer {
         margin-bottom: 75px;
     }
 
-    .title {
+    .home .title {
         margin: auto 14%;
+        color: #fff;
         font-size: 30px;
+        text-align: center;
+        text-transform: capitalize;
+        font-family: 'gilroy-bold';
+        margin-top: -77px;
     }
-
     .subtitle {
         margin: 10px auto;
         font-size: 14px;

@@ -25,7 +25,7 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Invoice</th>
+                            <th>Bukti Bayar</th>
                             <th>Tanggal Pembelian</th>
                             <th>Jumlah Produk</th>
                             <th>Harga Produk</th>
@@ -36,20 +36,19 @@
                     <tbody>
 
                         @foreach ($pay as $item)
-
-                        @if ($item['status'] == 'Paid')
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <a href="{{ url('invoice/'. $item['id']) }}" target="_blank">Lihat Invoice</a>
+                                        <a href="{{ url('invoice/'. $item->id) }}" target="_blank">Lihat Bukti Pembayaran</a>
                                     </td>
-                                    <td>{{ \Carbon\Carbon::parse($item['updated_at'])->format('Y-m-d') }}</td>
-                                    <td>{{ count($item['payment']) }} Produk</td>
-                                    <td>Rp. {{ number_format($item['total']) }}</td>
-                                    <td>{{ $item['bank'] }}</td>
-                                    <td style="color: green">{{ $item['status'] }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('Y-m-d') }}</td>
+                                    <td>{{ count($item->payment) }} Produk</td>
+                                    <td>Rp. {{ number_format($item->total) }}</td>
+                                    <td>{{ $item->bank }}</td>
+                                    @if ($item->status == 'Paid')
+                                    <td style="color: green">Dibayar</td>
+                                    @endif
                                 </tr>
-                        @endif
                         @endforeach
                     </tbody>
                 </table>

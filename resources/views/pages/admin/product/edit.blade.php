@@ -1,11 +1,11 @@
 @extends('layouts.admin.app')
 
 @section('title')
-    Edit Product - Admin
+    Edit Produk - Admin
 @endsection
 @section('content')
     <div class="title mb-4">
-        <h4 class="m-b-lg">Edit Product</h4>
+        <h4 class="m-b-lg">Edit Produk</h4>
     </div>
     <div class="card">
         <div class="card-body">

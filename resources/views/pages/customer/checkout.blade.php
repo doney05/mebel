@@ -74,7 +74,7 @@
                         <th>No</th>
                         <th>Nama Produk</th>
                         <th>Jumlah Beli</th>
-                        <th>Grand Total</th>
+                        <th>Total Semua</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -90,7 +90,7 @@
                             <td>{{ $prod[$h]['name'] }}</td>
                             <td>{{ $q }}</td>
                             <td>Rp. {{ number_format($payment_detail['total']) }}</td>
-                            <td>Unpaid</td>
+                            <td>Belum Dibayar</td>
                             @endforeach
                         </tr>
                     @endforeach --}}
@@ -100,7 +100,7 @@
                         <td>{{ $item->product->name }}</td>
                         <td>{{ $item->qty }}</td>
                         <td>Rp. {{ number_format($item->price) }}</td>
-                        <td>Unpaid</td>
+                        <td>Belum Dibayar</td>
                     </tr>
                     @endforeach
                 </tbody>
